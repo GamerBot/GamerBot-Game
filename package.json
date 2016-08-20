@@ -1,0 +1,47 @@
+{
+  "name": "gamerbot-game",
+  "description": "Base class for GamerBot Game modules",
+  "version": "0.0.1",
+  "author": "Shawn Sorichetti <ssoriche@gmail.com>",
+  "license": "MIT",
+
+  "keywords": "GamerBot, Game, Base",
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ssoriche/gamerbot-game.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/ssoriche/gamerbot-game/issues"
+  },
+
+  "dependencies": {
+  },
+
+  "peerDependencies": {
+    "hubot": "2.x"
+  },
+
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "coffee-script": "^1.10.0",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-mocha-test": "~0.12.7",
+    "grunt-release": "~0.11.0",
+    "hubot": "2.x",
+    "hubot-test-helper": "^1.4.4",
+    "matchdep": "~0.3.0",
+    "mocha": "^2.5.3",
+    "sinon": "^1.13.0",
+    "sinon-chai": "^2.7.0"
+  },
+
+  "main": "index.coffee",
+
+  "scripts": {
+    "test": "grunt test"
+  }
+}
