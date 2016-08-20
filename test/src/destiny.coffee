@@ -12,7 +12,7 @@
 #
 # Author:
 #   Shawn Sorichetti <ssoriche@gmail.com>
-Game = require("../../src/gamerbot-game.coffee").Game
+Game = require("../../src/gamerbot-game.coffee")
 
 class Destiny extends Game
   lfg: ->
@@ -39,5 +39,3 @@ class Destiny extends Game
 
 module.exports = (robot) ->
   game = new Destiny robot, 'dtg'
-
-exports.Destiny = Destiny

@@ -79,4 +79,4 @@ class Game
   platforms: ->
     return []
 
-exports.Game = Game
+module.exports = Game
