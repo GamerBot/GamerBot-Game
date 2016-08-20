@@ -39,7 +39,7 @@
     "sinon-chai": "^2.7.0"
   },
 
-  "main": "index.coffee",
+  "main": "src/gamerbot-game.coffee",
 
   "scripts": {
     "test": "grunt test"
