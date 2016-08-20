@@ -13,6 +13,8 @@ In hubot project repo, run:
 ## Sample Implementation
 
 ```
+Game = require("gamerbot-game")
+
 class Destiny extends Game
   lfg: ->
     return true
