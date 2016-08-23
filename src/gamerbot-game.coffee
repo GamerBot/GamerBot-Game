@@ -42,25 +42,25 @@
 #   Shawn Sorichetti <ssoriche@gmail.com>
 
 class Game
-  constructor: (@robot, ident) ->
+  constructor: (@robot, @ident) ->
     @cache = {}
 
-    @robot.hear ///^[\.!]#{ident}$///i, (msg) =>
+    @robot.hear ///^[\.!]#{@ident}$///i, (msg) =>
       msg.send @name()
 
-    @robot.hear ///^[\.!]#{ident}\s+lfg\?$///i, (msg) =>
+    @robot.hear ///^[\.!]#{@ident}\s+lfg\?$///i, (msg) =>
       msg.send "LFG enabled: " + @lfg()
 
-    @robot.hear ///^[\.!]#{ident}\s+lfg$///i, (msg) =>
+    @robot.hear ///^[\.!]#{@ident}\s+lfg$///i, (msg) =>
 
-    @robot.hear ///^[\.!]#{ident}\s+events$///i, (msg) =>
+    @robot.hear ///^[\.!]#{@ident}\s+events$///i, (msg) =>
       events = ""
       for event in Object.keys(@events())
         events += "#{event} ... #{@events()[event].name}\n"
       if events.length > 0
         msg.send "Events:\n" + events
 
-    @robot.hear ///^[\.!]#{ident}\s+platform(s)?$///i, (msg) =>
+    @robot.hear ///^[\.!]#{@ident}\s+platform(s)?$///i, (msg) =>
       platforms = ""
       for platform in @platforms()
         platforms += "#{platform}\n"
