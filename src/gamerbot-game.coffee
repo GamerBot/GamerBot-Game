@@ -67,6 +67,16 @@ class Game
       if platforms.length > 0
         msg.send "Platforms:\n" + platforms
 
+    @robot.hear ///^[\.!]#{@ident}\s+(?:i\s+)?p(?:lays?)?$///i, (msg) =>
+      nick = msg.message.user.name.toLowerCase()
+      @add_player(nick)
+      msg.send "#{nick} added as player of #{@name()}"
+
+    @robot.hear ///^[\.!]#{@ident}\s+n(?:olonger)?\s+p(?:lays?)?$///i, (msg) =>
+      nick = msg.message.user.name.toLowerCase()
+      @rm_player(nick)
+      msg.send "#{nick} is no longer a player of #{@name()}"
+
   lfg: ->
     return false
 
@@ -78,5 +88,19 @@ class Game
 
   platforms: ->
     return []
+
+  add_player: (nick) =>
+    players = @robot.brain.get "gamerbot.games.#{@ident}.players"
+    players = players ? {}
+
+    players[nick] = nick
+    @robot.brain.set "gamerbot.games.#{@ident}.players", players
+
+  rm_player: (nick) =>
+    players = @robot.brain.get "gamerbot.games.#{@ident}.players"
+    players = players ? {}
+
+    delete players[nick]
+    @robot.brain.set "gamerbot.games.#{@ident}.players", players
 
 module.exports = Game

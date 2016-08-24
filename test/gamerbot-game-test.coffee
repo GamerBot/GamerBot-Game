@@ -39,3 +39,17 @@ describe 'gamerbot-game', ->
         ['alice', '.dtg platform']
         ['hubot', 'Platforms:\nPS4\nXBONE\n']
       ]
+
+  it 'hears play', ->
+    @room.user.say('alice', '.dtg i play').then =>
+      expect(@room.messages).to.eql [
+        ['alice', '.dtg i play']
+        ['hubot', 'alice added as player of Destiny']
+      ]
+    @room.user.say('alice', '.dtg n play').then =>
+      expect(@room.messages).to.eql [
+        ['alice', '.dtg i play']
+        ['alice', '.dtg n play']
+        ['hubot', 'alice added as player of Destiny']
+        ['hubot', 'alice is no longer a player of Destiny']
+      ]
