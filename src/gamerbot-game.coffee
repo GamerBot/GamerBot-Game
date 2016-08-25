@@ -90,17 +90,17 @@ class Game
     return []
 
   add_player: (nick) =>
-    players = @robot.brain.get "gamerbot.games.#{@ident}.players"
+    players = @robot.brain.get "gamerbot.games.#{@ident}.players.all"
     players = players ? {}
 
     players[nick] = nick
-    @robot.brain.set "gamerbot.games.#{@ident}.players", players
+    @robot.brain.set "gamerbot.games.#{@ident}.players.all", players
 
   rm_player: (nick) =>
-    players = @robot.brain.get "gamerbot.games.#{@ident}.players"
+    players = @robot.brain.get "gamerbot.games.#{@ident}.players.all"
     players = players ? {}
 
     delete players[nick]
-    @robot.brain.set "gamerbot.games.#{@ident}.players", players
+    @robot.brain.set "gamerbot.games.#{@ident}.players.all", players
 
 module.exports = Game
