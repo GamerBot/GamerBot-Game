@@ -17,6 +17,7 @@
   },
 
   "dependencies": {
+    "GamerBot-Profile": "git+https://git@github.com/GamerBot/GamerBot-Profile.git"
   },
 
   "peerDependencies": {
