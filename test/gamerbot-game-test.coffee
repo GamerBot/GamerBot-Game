@@ -1,4 +1,5 @@
 Helper = require('hubot-test-helper')
+Profile = require('GamerBot-Profile')
 chai = require 'chai'
 
 expect = chai.expect
@@ -41,15 +42,28 @@ describe 'gamerbot-game', ->
       ]
 
   it 'hears play', ->
+    profile = new Profile @room.robot
+    profile.add_platform('alice','XBONE','malice')
+    @room.user.say('alice', '.me plat add XBONE as malice').then =>
+      expect(@room.messages).to.eql [
+        ['alice', '.me plat add XBONE as malice']
+        ['hubot', 'XBONE added to your platforms']
+      ]
     @room.user.say('alice', '.dtg i play').then =>
       expect(@room.messages).to.eql [
+        ['alice', '.me plat add XBONE as malice']
         ['alice', '.dtg i play']
         ['hubot', 'alice added as player of Destiny']
+        ['hubot', 'XBONE added to your platforms']
+        ['hubot', 'XBONE added to your platforms']
       ]
     @room.user.say('alice', '.dtg n play').then =>
       expect(@room.messages).to.eql [
+        ['alice', '.me plat add XBONE as malice']
         ['alice', '.dtg i play']
         ['alice', '.dtg n play']
         ['hubot', 'alice added as player of Destiny']
         ['hubot', 'alice is no longer a player of Destiny']
+        ['hubot', 'XBONE added to your platforms']
+        ['hubot', 'XBONE added to your platforms']
       ]

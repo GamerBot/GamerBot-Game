@@ -41,6 +41,8 @@
 # Author:
 #   Shawn Sorichetti <ssoriche@gmail.com>
 
+Profile = require('GamerBot-Profile')
+
 class Game
   constructor: (@robot, @ident) ->
     @cache = {}
@@ -69,8 +71,14 @@ class Game
 
     @robot.hear ///^[\.!]#{@ident}\s+(?:i\s+)?p(?:lays?)?$///i, (msg) =>
       nick = msg.message.user.name.toLowerCase()
-      @add_player(nick)
-      msg.send "#{nick} added as player of #{@name()}"
+      set_platform = @add_player(nick)
+
+      if set_platform.length == 0
+        msg.send "Failure to associate #{@name()} platforms #{@platforms().join(', ')}"
+      else if set_platform.length > 1
+        msg.send "Please select which platform you're playing on: #{set_platform.join(', ')}"
+      else
+        msg.send "#{nick} added as player of #{@name()}"
 
     @robot.hear ///^[\.!]#{@ident}\s+n(?:olonger)?\s+p(?:lays?)?$///i, (msg) =>
       nick = msg.message.user.name.toLowerCase()
@@ -89,12 +97,30 @@ class Game
   platforms: ->
     return []
 
-  add_player: (nick) =>
+  add_player: (nick, platform) =>
+    profile = new Profile @robot
+    player_platforms = profile.match_platforms(nick, @platforms())
+
+    if !platform && player_platforms.length != 1
+      return player_platforms
+    if platform && @platforms().indexOf(platform) == -1
+      return []
+    if !platform && player_platforms.length == 1
+      platform = player_platforms[0]
+
     players = @robot.brain.get "gamerbot.games.#{@ident}.players.all"
     players = players ? {}
 
     players[nick] = nick
     @robot.brain.set "gamerbot.games.#{@ident}.players.all", players
+
+    platform_players = @robot.brain.get "gamerbot.games.#{@ident}.players.#{platform}"
+    platform_players = platform_players ? {}
+
+    platform_players[nick] = nick
+    @robot.brain.set "gamerbot.games.#{@ident}.players.#{platform}", platform_players
+
+    return [platform]
 
   rm_player: (nick) =>
     players = @robot.brain.get "gamerbot.games.#{@ident}.players.all"
