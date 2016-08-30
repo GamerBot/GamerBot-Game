@@ -45,6 +45,7 @@ Profile = require('GamerBot-Profile')
 
 class Game
   constructor: (@robot, @ident) ->
+    @robot.emit "gamerbot.games.register", ({ ident: @ident, name: @name(), builder: @.constructor })
     @cache = {}
 
     @robot.hear ///^[\.!]#{@ident}$///i, (msg) =>
