@@ -2,18 +2,18 @@
 
 Base class for GamerBot Game modules
 
-See [`src/gamerbot-game.coffee`](src/gamerbot-game.coffee) for full documentation.
+See [`src/GamerBot-Game.coffee`](src/GamerBot-Game.coffee) for full documentation.
 
 ## Installation
 
 In hubot project repo, run:
 
-`npm install git+https://git@github.com/ssoriche/GamerBot-Game --save`
+`npm install git+https://git@github.com/GamerBot/GamerBot-Game --save`
 
 ## Sample Implementation
 
 ```
-Game = require("gamerbot-game")
+Game = require("GamerBot-Game")
 
 class Destiny extends Game
   lfg: ->

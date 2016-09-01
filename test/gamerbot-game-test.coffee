@@ -6,7 +6,7 @@ expect = chai.expect
 
 helper = new Helper('src/destiny.coffee')
 
-describe 'gamerbot-game', ->
+describe 'GamerBot-Game', ->
   beforeEach ->
     @room = helper.createRoom()
 

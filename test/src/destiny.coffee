@@ -12,7 +12,7 @@
 #
 # Author:
 #   Shawn Sorichetti <ssoriche@gmail.com>
-Game = require("../../src/gamerbot-game.coffee")
+Game = require("../../src/GamerBot-Game.coffee")
 
 class Destiny extends Game
   lfg: ->
